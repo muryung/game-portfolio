@@ -2,6 +2,17 @@
 
     // Add custom styles for your projects descriptions here
 
+    @font-face {
+        font-family: 'Pretendard-Regular';
+        src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    * {
+        font-family: 'Pretendard-Regular', sans-serif;
+    }
+
     .paragraph {
         margin: 20px 0px;
     }
@@ -17,6 +28,13 @@
 
     .phone-screenshot {
         width: 100%;
+    }
+
+    .phone-screenshot:hover {
+        -webkit-transform: scale(1.1);
+        -ms-transform: scale(1.1);
+        transform: scale(1.1);
+        transition: all 0.1s ease-in;
     }
 
     .pc-screenshot {

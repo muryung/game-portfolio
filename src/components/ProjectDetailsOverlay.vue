@@ -1,13 +1,13 @@
 <template>
   <transition name="fade">
     <div v-if="visible">
-      <div class="overlay">
+      <div @click="$emit('close')" class="overlay">
       </div>
       <div class="dialog" :style="{ 'background-color': color }">
         <h1 class="dialog-title">{{ title }}</h1>
         <div @click="$emit('close')" class="dialog-close"><i class="fa fa-times fa-lg fa-fw"></i></div>
         <div class="dialog-content">
-          <div v-html="htmlContent"></div>
+          <component :is="gameProjectsData[selectedProjectIndex].component"/>
           <div class="dialog-bottom">
           <a @click="$emit('close')" class="dialog-close-button">Close</a>
         </div>
@@ -26,7 +26,8 @@ export default Vue.extend({
     visible: Boolean,
     color: String,
     title: String,
-    htmlContent: String,
+    selectedProjectIndex: Number,
+    gameProjectsData: Array
   },
   methods: {
     getImage: function(url: string) {
@@ -34,9 +35,11 @@ export default Vue.extend({
     }
   }
 });
+
 </script>
 
 <style scoped>
+
 .overlay {
   background-color: rgba(0,0,0,0.5);
   z-index: 10;

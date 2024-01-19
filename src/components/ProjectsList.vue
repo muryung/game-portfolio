@@ -1,13 +1,13 @@
 <template>
     <div>
       <div class="projects-list">
-        <template v-for="project in projects">
+        <template v-for="(project, index) in projects">
           <div
             :key="project.id"
-              @click="showDetails(project)"
+              @click="showDetails(index)"
               class="project-item"
               :class="{ 'wide': project.isWide, 'high': project.isHigh }">
-            <div class="project-item-image" :style="{ 'background-image': 'url(' + project.iconUrl + ')' }">
+            <div class="project-item-image" :style="{ 'background-image': 'url(' + project.mainImg + ')' }">
             </div>
             <div class="title-bar" :style="{ 'background-color': project.accentColor + 'DD' }">
                 <div class="title-text">
@@ -22,8 +22,9 @@
         v-on:close="showPopup = false"
         :visible="showPopup"
         :title="popupTitle"
-        :htmlContent="popupContent"
         :color="popupColor"
+        :selectedProjectIndex="selectedProjectIndex"
+        :gameProjectsData="projects"
       />
     </div>
 </template>
@@ -31,7 +32,6 @@
 <script lang="ts">
 import Vue from "vue";
 import ProjectDetailsOverlay from "@/components/ProjectDetailsOverlay.vue";
-import ProjectData from "@/data/ProjectData.ts";
 
 export default Vue.extend({
   name: "ProjectsList",
@@ -46,17 +46,16 @@ export default Vue.extend({
       showPopup: false,
       popupTitle: "",
       popupColor: "",
-      popupContent: ""
+      popupContent: "",
+      selectedProjectIndex: 0
     };
   },
   methods: {
-    showDetails: function (item: ProjectData) {
-      // if (event) {
-      //   alert(event.target);
-      // }
-      this.popupTitle = item.name;
-      this.popupColor = item.accentColor;
-      this.popupContent = item.htmlDescription;
+    showDetails: function (index: number) {
+      const project = this.projects[index];
+      this.popupTitle = project.name;
+      this.popupColor = project.accentColor;
+      this.selectedProjectIndex = index;
       this.showPopup = true;
       window.scrollTo(0,0);
     },

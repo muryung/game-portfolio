@@ -16,4 +16,7 @@ export default class ProjectData {
         this.isWide = isWide;
         this.accentColor = accentColor;
     }
+
+
 }
+
